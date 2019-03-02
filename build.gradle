@@ -3,7 +3,7 @@
  */
 
 plugins {
-	id 'war'
+    id 'war'
     id 'java'
     id 'maven-publish'
 }
@@ -33,7 +33,7 @@ dependencies {
     compile 'org.hsqldb:hsqldb:2.3.5'
     compile 'org.glassfish:javax.el:3.0.0'
     compile 'ch.qos.logback:logback-classic:1.2.3'
-	implementation group: 'commons-io', name: 'commons-io', version: '2.6'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.6'
     testCompile 'org.seedstack.seed:seed-testing:3.4.1'
 }
 
