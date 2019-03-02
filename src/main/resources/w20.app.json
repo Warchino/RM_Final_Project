@@ -1,0 +1,16 @@
+{
+  "w20-core": {
+    "modules": {
+      "application": {
+        "home": "/store-management/home"
+      },
+      "security": {
+        "redirectAfterLogin": "/store-management/products",
+        "autoLogin": true
+      },
+      "notifications": {}
+    }
+  },
+  "store-management": {}
+}
+
