@@ -24,3 +24,15 @@ hs_err_pid*
 
 # Gradle files
 .gradle/
+build/
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+#Vim
+*~
