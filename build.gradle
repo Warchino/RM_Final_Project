@@ -6,6 +6,7 @@ plugins {
     id 'war'
     id 'java'
     id 'maven-publish'
+    id "org.gretty" version "2.3.1"
 }
 
 repositories {
@@ -47,6 +48,10 @@ publishing {
             from(components.java)
         }
     }
+}
+
+gretty {
+    httpPort = 9080
 }
 
 tasks.withType(JavaCompile) {
