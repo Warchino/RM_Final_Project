@@ -36,3 +36,6 @@ release.properties
 
 #Vim
 *~
+
+# Idea
+.idea
