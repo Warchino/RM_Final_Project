@@ -38,7 +38,7 @@ pipeline {
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: 'build/reports/jacoco/jacocoHtml',
+                    reportDir: 'build/reports/jacoco',
                     reportFiles: 'index.html',
                     reportName: 'JaCoCo Report'
                   ]
