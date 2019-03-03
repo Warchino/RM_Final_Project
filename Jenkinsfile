@@ -7,10 +7,10 @@ pipeline {
                 echo 'Building...'
 
 		        sh './gradlew clean build'
-                archiveArtifacts artifacts: '/build/libs/*.war', fingerprint: true
+                archiveArtifacts artifacts: 'build/libs/*.war', fingerprint: true
 
 		        sh './gradlew jar'
-		        archiveArtifacts artifacts: '/build/libs/*.jar', fingerprint: true
+		        archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
 
             }
         }
@@ -25,7 +25,7 @@ pipeline {
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: '/build/reports/tests/test',
+                    reportDir: 'build/reports/tests/test',
                     reportFiles: 'index.html',
                     reportName: 'JUnit Report'
                   ]
@@ -37,7 +37,7 @@ pipeline {
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: '/build/reports/jacoco/jacocoHtml',
+                    reportDir: 'build/reports/jacoco/jacocoHtml',
                     reportFiles: 'index.html',
                     reportName: 'JaCoCo Report'
                   ]
