@@ -7,10 +7,10 @@ pipeline {
                 echo 'Building...'
 
 		        sh './gradlew clean build'
-                archiveArtifacts artifacts: '/build/libs/**/*.war', fingerprint: true
+                archiveArtifacts artifacts: '/build/libs/*.war', fingerprint: true
 
 		        sh './gradlew jar'
-		        archiveArtifacts artifacts: '/build/libs/**/*.jar', fingerprint: true
+		        archiveArtifacts artifacts: '/build/libs/*.jar', fingerprint: true
 
             }
         }
