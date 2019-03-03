@@ -48,8 +48,8 @@ pipelines:
                     source: build/test-results/test/*.xml
                     destination: xml
               tabs:
-                Unit Test: html/index.html
-                Jacoco Test Report: jacoco/index.html
+                Unit_Test: html/index.html
+                Jacoco: jacoco/index.html
 
             CodeQuality:
               tasks:
