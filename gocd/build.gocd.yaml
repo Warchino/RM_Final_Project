@@ -42,7 +42,7 @@ pipelines:
                     source: build/reports/tests/test/**/*
                     destination: html
                 - build:
-                    source: build/reports/tests/jacoco/**/*
+                    source: build/reports/jacoco/**/*
                     destination: jacoco
                 - test:
                     source: build/test-results/test/*.xml
