@@ -18,6 +18,7 @@ pipelines:
                     arguments:
                       - clean
                       - build
+                      - jar
               artifacts:
                 - build:
                     source: build/libs/*.war
