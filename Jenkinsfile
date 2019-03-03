@@ -29,6 +29,7 @@ pipeline {
                     reportFiles: 'index.html',
                     reportName: 'JUnit Report'
                   ]
+                junit 'build/test-results/**/*.xml'
 
                 sh './gradlew jacocoTestReport'
 
