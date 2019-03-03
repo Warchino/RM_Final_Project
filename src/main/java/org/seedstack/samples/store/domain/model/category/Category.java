@@ -7,11 +7,12 @@
 
 package org.seedstack.samples.store.domain.model.category;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import org.seedstack.business.domain.BaseAggregateRoot;
 import org.seedstack.business.domain.Identity;
 import org.seedstack.business.util.inmemory.InMemorySequenceGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Category extends BaseAggregateRoot<Long> {
@@ -21,7 +22,7 @@ public class Category extends BaseAggregateRoot<Long> {
     private String name;
     private String urlImg;
 
-    private Category() {
+    Category() {
         // A private constructor ensures that the category is created through its
         // factory so the identity generator is invoked just after creation
     }
