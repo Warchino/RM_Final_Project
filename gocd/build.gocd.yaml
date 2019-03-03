@@ -1,0 +1,59 @@
+format_version: 3
+pipelines:
+  DevOps:
+    group: RM_Final_Project
+    materials:
+      repo:
+        git: https://github.com/devops08/RM_Final_Project.git
+        branch: master
+
+    stages:
+      - Build:
+          jobs:
+            Building:
+              tasks:
+                - exec:
+                    working_directory: .
+                    command: ./gradlew
+                    arguments:
+                      - clean
+                      - build
+              artifacts:
+                - build:
+                    source: build/libs/*.war
+                    destination: war
+                - build:
+                    source: build/libs/*.jar
+                    destination: jar
+      - Test:
+          jobs:
+            Unit_Test:
+              tasks:
+                - exec:
+                    working_directory: .
+                    command: ./gradlew
+                    arguments:
+                      - test
+                      - check
+                      - jacocoTestReport
+              artifacts:
+                - build:
+                    source: build/reports/tests/test/**/*
+                    destination: html
+                - build:
+                    source: build/reports/tests/jacoco/**/*
+                    destination: jacoco
+                - test:
+                    source: build/test-results/test/*.xml
+                    destination: xml
+              tabs:
+                unit_test: html/index.html
+                jacoco_report: jacoco/index.html
+
+            CodeQuality:
+              tasks:
+                - exec:
+                    working_directory: .
+                    command: ./gradlew
+                    arguments:
+                      - sonarqube
