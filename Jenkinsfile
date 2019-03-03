@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Testing..'
 
-                sh './gradle-java-at08/gradlew check -p gradle-java-at08'
+                sh './gradlew check'
 
                 // Publis the JUnit test Report
                 publishHTML target: [
@@ -30,7 +30,7 @@ pipeline {
                     reportName: 'JUnit Report'
                   ]
 
-                sh './gradle-java-at08/gradlew jacocoTestReport -p gradle-java-at08'
+                sh './gradlew jacocoTestReport'
 
                 // Publish the Java Code Coverage Report
                 publishHTML target: [
