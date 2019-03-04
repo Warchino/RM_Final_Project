@@ -3,7 +3,8 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {
+			try{
+				steps {
                 echo 'Building...'
 
 		        sh './gradlew clean build'
@@ -11,11 +12,17 @@ pipeline {
 
 		        sh './gradlew jar'
 		        archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-
-            }
+            	}
+				currentBuild.result = "SUCCESS"	
+			} catch(e) {
+				currentBuild.result = "FAILED"
+				throw e
+			}
+            
         }
         stage('Test') {
-            steps {
+			try{
+				steps {
                 echo 'Testing..'
 
                 sh './gradlew check'
@@ -42,26 +49,52 @@ pipeline {
                     reportFiles: 'index.html',
                     reportName: 'JaCoCo Report'
                   ]
-            }
+            	}
+				currentBuild.result = "SUCCESS"	
+			} catch(e) {
+				currentBuild.result = "FAILED"
+				throw e
+			}
         }
+
         stage('Code Quality Analysis') {
-            steps {
+			try{
+				steps {
                 echo 'Analyzing....'
                 sh './gradlew sonarqube'
-            }
+            	}
+				currentBuild.result = "SUCCESS"	
+			} catch(e) {
+				currentBuild.result = "FAILED"
+				throw e
+			}
         }
     }
     post {
             always {
                 echo 'Email notification'
-
-                emailext (
-                    subject: "Job '${env.JOB_NAME} ${env.BUILD_NUMBER}'",
-                    body: """<p>Check console output at <a href="${env.BUILD_URL}">${env.JOB_NAME}</a></p>""",
-                    to: "rodrigo.menacho@fundacion-jala.org",
-                    from: "menacho.devops@gmail.com"
-                )
+				if (currentBuild.result =="FAILED"){
+					notifyFailed()
+				} else{
+					notifySuccessful()
+				}
             }
         }
-
+	def notifySuccessful() {
+	  emailext (
+		  subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+		  body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+			<p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+		  recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+		)
+	}
+	def notifyFailed() {
+	  emailext (
+		  subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+		  body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+			<p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+		  recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+		)
+	}
+	
 }
