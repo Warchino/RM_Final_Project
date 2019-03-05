@@ -9,6 +9,7 @@ plugins {
     id 'org.gretty' version '2.3.1'
     id 'jacoco'
     id 'org.sonarqube' version '2.7'
+    id 'checkstyle'
 }
 
 repositories {
@@ -80,3 +81,8 @@ sonarqube {
         property "sonar.login", "d2d08d1514f208ba177f2c30180907d554acecde"
     }
 }
+
+checkstyle {
+    toolVersion = '8.18'
+}
+
