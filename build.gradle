@@ -10,6 +10,7 @@ plugins {
     id 'jacoco'
     id 'org.sonarqube' version '2.7'
     id 'checkstyle'
+    id "com.github.spotbugs" version "1.6.10"
 }
 
 repositories {
@@ -40,6 +41,7 @@ dependencies {
     compile group: 'org.seedstack.seed', name: 'seed-testing', version: '3.8.1', ext: 'pom'
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
     testCompile group: 'junit', name: 'junit', version: '4.12'
+	spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 }
 
 group = 'org.seedstack.samples'
@@ -86,3 +88,14 @@ checkstyle {
     toolVersion = '8.18'
 }
 
+spotbugs {
+	effort = "max"
+	toolVersion = '3.1.12'
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+      xml.enabled = false
+      html.enabled = true
+    }
+}
