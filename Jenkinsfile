@@ -50,16 +50,16 @@ pipeline {
 				sh './gradlew sonarqube'
 			}
         }
-		post {
-			echo 'Email notification'
-			success {
-				notifySuccessful()
-			}
-			failure { 
-				notifyFailed()
-			}
-		}
     }
+	post {
+		echo 'Email notification'
+		success {
+			notifySuccessful()
+		}
+		failure { 
+			notifyFailed()
+		}
+	}
 }
 
 
