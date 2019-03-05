@@ -44,17 +44,27 @@ pipelines:
                 - build:
                     source: build/reports/jacoco/**/*
                     destination: jacoco
+				- build:
+                    source: build/reports/checkstyle/**/*
+                    destination: checkstyle
+				- build:
+                    source: build/reports/spotbugs/**/*
+                    destination: spotbugs
                 - test:
                     source: build/test-results/test/*.xml
                     destination: xml
               tabs:
                 Unit_Test: html/index.html
                 Jacoco: jacoco/index.html
-
-            CodeQuality:
-              tasks:
-                - exec:
-                    working_directory: .
-                    command: ./gradlew
-                    arguments:
-                      - sonarqube
+				Checkstyle: checkstyle/index.html
+				SpotBugs: spotbugs/index.html
+				
+      - CodeQuality:
+			jobs:
+			  Sonarqube:
+			    tasks:
+			  	  - exec:
+				      working_directory: .
+					  command: ./gradlew
+					  arguments:
+					    - sonarqube
