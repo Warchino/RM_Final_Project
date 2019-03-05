@@ -79,13 +79,15 @@ pipeline {
     post {
             always {
                 echo 'Email notification'
-				if (currentBuild.result =="FAILED"){
+				script {
+					if (currentBuild.result =="FAILED"){
 					notifyFailed()
-				} else{
-					notifySuccessful()
+					} else{
+						notifySuccessful()
+					}
 				}
             }
-        }
+	}
 }
 def notifySuccessful() {
 	  emailext (
