@@ -41,7 +41,27 @@ pipeline {
 					keepAll: true,
 					reportDir: 'build/reports/jacoco',
 					reportFiles: 'index.html',
-					reportName: 'JaCoCo Report'
+					reportName: 'Jacoco Report'
+				  ]
+				
+				// Publish Checklist Report
+				publishHTML target: [
+					allowMissing: false,
+					alwaysLinkToLastBuild: false,
+					keepAll: true,
+					reportDir: 'build/reports/checklist',
+					reportFiles: 'index.html',
+					reportName: 'Checklist Report'
+				  ]
+				
+				// Publish Spotbugs(Findbugs) Report
+				publishHTML target: [
+					allowMissing: false,
+					alwaysLinkToLastBuild: false,
+					keepAll: true,
+					reportDir: 'build/reports/spotbugs',
+					reportFiles: 'index.html',
+					reportName: 'Spotbugs Report'
 				  ]
 			}
         }
