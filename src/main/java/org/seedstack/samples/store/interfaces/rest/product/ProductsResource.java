@@ -60,6 +60,8 @@ public class ProductsResource {
     @Context
     private UriInfo uriInfo;
 
+    private static final String NOT_FOUND = " not found";
+
     /**
      * Method.
      *
@@ -109,7 +111,7 @@ public class ProductsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public ProductRepresentation getProduct(final @PathParam("productId") long productId) {
         return fluentAssembler.assemble(productRepository.get(productId)
-                .orElseThrow(() -> new NotFoundException("Customer " + productId + " not found")))
+                .orElseThrow(() -> new NotFoundException("Customer " + productId + NOT_FOUND)))
                 .to(ProductRepresentation.class);
     }
 
@@ -166,7 +168,7 @@ public class ProductsResource {
                     .fromRepository()
                     .orFail();
         } catch (AggregateNotFoundException e) {
-            throw new NotFoundException("Product " + productId + " not found");
+            throw new NotFoundException("Product " + productId + NOT_FOUND);
         }
         productRepository.update(product);
 
@@ -184,7 +186,7 @@ public class ProductsResource {
         try {
             productRepository.remove(productId);
         } catch (AggregateNotFoundException e) {
-            throw new NotFoundException("Product " + productId + " not found", e);
+            throw new NotFoundException("Product " + productId + NOT_FOUND, e);
         }
     }
 }
