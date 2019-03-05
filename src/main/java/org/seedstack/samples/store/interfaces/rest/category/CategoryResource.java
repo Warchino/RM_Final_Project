@@ -8,7 +8,20 @@
 package org.seedstack.samples.store.interfaces.rest.category;
 
 import com.google.common.base.Strings;
-import java.net.URI;
+import org.seedstack.business.assembler.dsl.FluentAssembler;
+import org.seedstack.business.domain.AggregateNotFoundException;
+import org.seedstack.business.domain.Repository;
+import org.seedstack.business.pagination.Page;
+import org.seedstack.business.pagination.dsl.Paginator;
+import org.seedstack.business.specification.Specification;
+import org.seedstack.business.specification.dsl.SpecificationBuilder;
+import org.seedstack.jpa.JpaUnit;
+import org.seedstack.samples.store.domain.model.category.Category;
+import org.seedstack.samples.store.domain.model.product.Product;
+import org.seedstack.samples.store.interfaces.rest.Paging;
+import org.seedstack.samples.store.interfaces.rest.product.ProductRepresentation;
+import org.seedstack.seed.transaction.Transactional;
+
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.BeanParam;
@@ -26,21 +39,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import org.seedstack.business.assembler.dsl.FluentAssembler;
-import org.seedstack.business.domain.AggregateNotFoundException;
-import org.seedstack.business.domain.Repository;
-import org.seedstack.business.modelmapper.ModelMapper;
-import org.seedstack.business.pagination.Page;
-import org.seedstack.business.pagination.dsl.Paginator;
-import org.seedstack.business.specification.Specification;
-import org.seedstack.business.specification.dsl.SpecificationBuilder;
-import org.seedstack.jpa.JpaUnit;
-import org.seedstack.samples.store.domain.model.category.Category;
-import org.seedstack.samples.store.domain.model.product.Product;
-import org.seedstack.samples.store.interfaces.rest.Paging;
-import org.seedstack.samples.store.interfaces.rest.product.ProductRepresentation;
-import org.seedstack.seed.transaction.Transactional;
+import java.net.URI;
 
+/**
+ * Class.
+ */
 @Path("/categories")
 @Transactional
 @JpaUnit("store")
@@ -59,10 +62,17 @@ public class CategoryResource {
     @Context
     private UriInfo uriInfo;
 
+    /**
+     * Method.
+     *
+     * @param searchString String.
+     * @param paging       Paging.
+     * @return Page.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Page<CategoryRepresentation> listCategories(@QueryParam("searchString") String searchString,
-            @BeanParam Paging paging) {
+    public Page<CategoryRepresentation> listCategories(final @QueryParam("searchString") String searchString,
+                                                       final @BeanParam Paging paging) {
         return fluentAssembler.assemble(paginator.paginate(categoryRepository)
                 .byPage(paging.getPageIndex())
                 .ofSize(paging.getPageSize())
@@ -70,7 +80,13 @@ public class CategoryResource {
                 .toPageOf(CategoryRepresentation.class);
     }
 
-    private Specification<Category> buildFilteringSpecification(String searchString) {
+    /**
+     * Method.
+     *
+     * @param searchString String,
+     * @return Spec.
+     */
+    private Specification<Category> buildFilteringSpecification(final String searchString) {
         if (!Strings.isNullOrEmpty(searchString)) {
             return specificationBuilder.of(Category.class)
                     .property("name").matching("*" + searchString + "*")
@@ -82,12 +98,19 @@ public class CategoryResource {
         }
     }
 
+    /**
+     * Method.
+     *
+     * @param categoryId Long.
+     * @param paging     Paging.
+     * @return Page.
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{categoryId}/products")
     public Page<ProductRepresentation> listProductByCategory(
-            @PathParam("categoryId") long categoryId,
-            @BeanParam Paging paging) {
+            final @PathParam("categoryId") long categoryId,
+            final @BeanParam Paging paging) {
         return fluentAssembler.assemble(paginator.paginate(productLongRepository)
                 .byPage(paging.getPageIndex())
                 .ofSize(paging.getPageSize())
@@ -97,10 +120,16 @@ public class CategoryResource {
                 .toPageOf(ProductRepresentation.class);
     }
 
+    /**
+     * Method.
+     *
+     * @param categoryRepresentation CategoryRepresentation.
+     * @return Response.
+     */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createCategory(CategoryRepresentation categoryRepresentation) {
+    public Response createCategory(final CategoryRepresentation categoryRepresentation) {
         Category category = fluentAssembler.merge(categoryRepresentation)
                 .into(Category.class)
                 .fromFactory();
@@ -112,12 +141,19 @@ public class CategoryResource {
                 .build();
     }
 
+    /**
+     * Method.
+     *
+     * @param categoryRepresentation CategoryRepresentation.
+     * @param categoryId             Long.
+     * @return CatergoryRepresentation.
+     */
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/{categoryId}")
-    public CategoryRepresentation updateCategory(CategoryRepresentation categoryRepresentation,
-            @PathParam("categoryId") long categoryId) {
+    public CategoryRepresentation updateCategory(final CategoryRepresentation categoryRepresentation,
+                                                 final @PathParam("categoryId") long categoryId) {
         if (categoryRepresentation.getId() != categoryId) {
             throw new BadRequestException("Category identifiers from body and URL don't match");
         }
@@ -136,9 +172,14 @@ public class CategoryResource {
         return fluentAssembler.assemble(category).to(CategoryRepresentation.class);
     }
 
+    /**
+     * Method.
+     *
+     * @param categoryId Long.
+     */
     @DELETE
     @Path("/{categoryId}")
-    public void deleteCategory(@PathParam("categoryId") long categoryId) {
+    public void deleteCategory(final @PathParam("categoryId") long categoryId) {
         try {
             categoryRepository.remove(categoryId);
         } catch (AggregateNotFoundException e) {

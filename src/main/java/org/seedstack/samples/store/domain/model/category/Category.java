@@ -14,6 +14,9 @@ import org.seedstack.business.util.inmemory.InMemorySequenceGenerator;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * Class Category.
+ */
 @Entity
 public class Category extends BaseAggregateRoot<Long> {
     @Id
@@ -22,29 +25,57 @@ public class Category extends BaseAggregateRoot<Long> {
     private String name;
     private String urlImg;
 
+    /**
+     * Empty constructor.
+     */
     Category() {
         // A private constructor ensures that the category is created through its
         // factory so the identity generator is invoked just after creation
     }
 
+    /**
+     * Getter.
+     *
+     * @return Long.
+     */
     @Override
     public Long getId() {
         return id;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * Setter.
+     *
+     * @param name String.
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getUrlImg() {
         return urlImg;
     }
 
-    public void setUrlImg(String urlImg) {
+    /**
+     * Setter.
+     *
+     * @param urlImg String.
+     */
+    public void setUrlImg(final String urlImg) {
         this.urlImg = urlImg;
     }
 }

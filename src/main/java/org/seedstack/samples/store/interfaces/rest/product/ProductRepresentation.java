@@ -11,6 +11,9 @@ import org.seedstack.business.assembler.AggregateId;
 import org.seedstack.business.assembler.DtoOf;
 import org.seedstack.samples.store.domain.model.product.Product;
 
+/**
+ * Class.
+ */
 @DtoOf(Product.class)
 public class ProductRepresentation {
 
@@ -22,11 +25,25 @@ public class ProductRepresentation {
     private Double price;
     private Long categoryId;
 
+    /**
+     * Constructor.
+     */
     public ProductRepresentation() {
     }
 
-    public ProductRepresentation(long id, String designation, String summary, String details,
-            String picture, Double price) {
+    /**
+     * Constructor.
+     *
+     * @param id          Long.
+     * @param designation String.
+     * @param summary     String.
+     * @param details     String.
+     * @param picture     String.
+     * @param price       String.
+     */
+    @SuppressWarnings("checkstyle:ParameterNumber")
+    public ProductRepresentation(final long id, final String designation, final String summary, final String details,
+                                 final String picture, final Double price) {
         this.id = id;
         this.designation = designation;
         this.summary = summary;
@@ -35,60 +52,130 @@ public class ProductRepresentation {
         this.price = price;
     }
 
+    /**
+     * Getter.
+     *
+     * @return Long.
+     */
     @AggregateId
     public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    /**
+     * Setter.
+     *
+     * @param id Long.
+     */
+    public void setId(final long id) {
         this.id = id;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getDesignation() {
         return designation;
     }
 
-    public void setDesignation(String designation) {
+    /**
+     * Setter.
+     *
+     * @param designation String.
+     */
+    public void setDesignation(final String designation) {
         this.designation = designation;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getSummary() {
         return summary;
     }
 
-    public void setSummary(String summary) {
+    /**
+     * Setter.
+     *
+     * @param summary String.
+     */
+    public void setSummary(final String summary) {
         this.summary = summary;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getDetails() {
         return details;
     }
 
-    public void setDetails(String details) {
+    /**
+     * Setter.
+     *
+     * @param details String.
+     */
+    public void setDetails(final String details) {
         this.details = details;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    /**
+     * Setter.
+     *
+     * @param picture String.
+     */
+    public void setPicture(final String picture) {
         this.picture = picture;
     }
 
+    /**
+     * Getter.
+     *
+     * @return Double
+     */
     public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    /**
+     * Setter.
+     *
+     * @param price Double.
+     */
+    public void setPrice(final Double price) {
         this.price = price;
     }
 
+    /**
+     * Getter.
+     *
+     * @return Long
+     */
     public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    /**
+     * Setter.
+     *
+     * @param categoryId Long.
+     */
+    public void setCategoryId(final Long categoryId) {
         this.categoryId = categoryId;
     }
 }

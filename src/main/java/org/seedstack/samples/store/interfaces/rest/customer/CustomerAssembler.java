@@ -13,13 +13,21 @@ import org.seedstack.business.modelmapper.ModelMapperAssembler;
 import org.seedstack.samples.store.domain.model.customer.Customer;
 import org.seedstack.samples.store.domain.model.customer.CustomerId;
 
+/**
+ * Class.
+ */
 public class CustomerAssembler extends ModelMapperAssembler<Customer, CustomerRepresentation> {
+    /**
+     * Method.
+     *
+     * @param modelMapper ModelMapper
+     */
     @Override
-    protected void configure(ModelMapper modelMapper) {
+    protected void configure(final ModelMapper modelMapper) {
         modelMapper.addConverter(
                 new AbstractConverter<CustomerId, String>() {
                     @Override
-                    protected String convert(CustomerId source) {
+                    protected String convert(final CustomerId source) {
                         return source.getValue();
                     }
                 }
@@ -27,7 +35,7 @@ public class CustomerAssembler extends ModelMapperAssembler<Customer, CustomerRe
         modelMapper.addConverter(
                 new AbstractConverter<String, CustomerId>() {
                     @Override
-                    protected CustomerId convert(String source) {
+                    protected CustomerId convert(final String source) {
                         return new CustomerId(source);
                     }
                 }

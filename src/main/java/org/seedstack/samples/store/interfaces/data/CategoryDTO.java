@@ -7,12 +7,16 @@
 
 package org.seedstack.samples.store.interfaces.data;
 
-import java.util.List;
 import org.seedstack.business.assembler.DtoOf;
 import org.seedstack.business.data.DataSet;
 import org.seedstack.samples.store.domain.model.category.Category;
 import org.seedstack.samples.store.domain.model.product.Product;
 
+import java.util.List;
+
+/**
+ * Class DTO.
+ */
 @DtoOf(Category.class)
 @DataSet(group = "store", name = "categories")
 public class CategoryDTO {
@@ -20,30 +24,63 @@ public class CategoryDTO {
     private String urlImg;
     private List<ProductDTO> products;
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    /**
+     * Setter.
+     *
+     * @param name String.
+     */
+    public void setName(final String name) {
         this.name = name;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getUrlImg() {
         return urlImg;
     }
 
-    public void setUrlImg(String urlImg) {
+    /**
+     * Setter.
+     *
+     * @param urlImg String.
+     */
+    public void setUrlImg(final String urlImg) {
         this.urlImg = urlImg;
     }
 
+    /**
+     * Getter.
+     *
+     * @return List ProductDTO.
+     */
     public List<ProductDTO> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductDTO> products) {
+    /**
+     * Setter.
+     *
+     * @param products List ProductDTO.
+     */
+    public void setProducts(final List<ProductDTO> products) {
         this.products = products;
     }
 
+    /**
+     * Static class.
+     */
     @DtoOf(Product.class)
     public static class ProductDTO {
         private String designation;
@@ -53,51 +90,111 @@ public class CategoryDTO {
         private Double price;
         private String category;
 
+        /**
+         * Getter.
+         *
+         * @return String.
+         */
         public String getDesignation() {
             return designation;
         }
 
-        public void setDesignation(String designation) {
+        /**
+         * Setter.
+         *
+         * @param designation String.
+         */
+        public void setDesignation(final String designation) {
             this.designation = designation;
         }
 
+        /**
+         * Getter.
+         *
+         * @return String.
+         */
         public String getSummary() {
             return summary;
         }
 
-        public void setSummary(String summary) {
+        /**
+         * Setter.
+         *
+         * @param summary String.
+         */
+        public void setSummary(final String summary) {
             this.summary = summary;
         }
 
+        /**
+         * Getter.
+         *
+         * @return String.
+         */
         public String getDetails() {
             return details;
         }
 
-        public void setDetails(String details) {
+        /**
+         * Setter.
+         *
+         * @param details String.
+         */
+        public void setDetails(final String details) {
             this.details = details;
         }
 
+        /**
+         * Getter.
+         *
+         * @return String.
+         */
         public String getPicture() {
             return picture;
         }
 
-        public void setPicture(String picture) {
+        /**
+         * Setter.
+         *
+         * @param picture String.
+         */
+        public void setPicture(final String picture) {
             this.picture = picture;
         }
 
+        /**
+         * Getter.
+         *
+         * @return Double.
+         */
         public Double getPrice() {
             return price;
         }
 
-        public void setPrice(Double price) {
+        /**
+         * Setter.
+         *
+         * @param price Double.
+         */
+        public void setPrice(final Double price) {
             this.price = price;
         }
 
+        /**
+         * Getter.
+         *
+         * @return String.
+         */
         public String getCategory() {
             return category;
         }
 
-        public void setCategory(String category) {
+        /**
+         * Setter.
+         *
+         * @param category String.
+         */
+        public void setCategory(final String category) {
             this.category = category;
         }
     }

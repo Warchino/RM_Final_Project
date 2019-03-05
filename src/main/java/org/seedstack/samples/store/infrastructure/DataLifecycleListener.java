@@ -1,17 +1,24 @@
 package org.seedstack.samples.store.infrastructure;
 
-import java.io.IOException;
-import java.io.InputStream;
-import javax.inject.Inject;
 import org.seedstack.business.data.DataManager;
 import org.seedstack.jpa.JpaUnit;
 import org.seedstack.seed.LifecycleListener;
 import org.seedstack.seed.transaction.Transactional;
 
+import javax.inject.Inject;
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * Class DataLifyCycle Listener.
+ */
 public class DataLifecycleListener implements LifecycleListener {
     @Inject
     private DataManager dataManager;
 
+    /**
+     * Method.
+     */
     @Override
     @Transactional
     @JpaUnit("store")
@@ -23,6 +30,9 @@ public class DataLifecycleListener implements LifecycleListener {
         }
     }
 
+    /**
+     * Method.
+     */
     @Override
     public void stopping() {
 
