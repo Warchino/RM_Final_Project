@@ -50,19 +50,19 @@ pipeline {
 				sh './gradlew sonarqube'
 			}
         }
+		post {
+			echo 'Email notification'
+			success {
+				notifySuccessful()
+			}
+			failure { 
+				notifyFailed()
+			}
+		}
     }
-    post {
-            always {
-                echo 'Email notification'
-				success {
-					notifySuccessful()
-				}
-				failure { 
-					notifyFailed()
-				}
-            }
-	}
 }
+
+
 def notifySuccessful() {
 	  emailext (
 		  subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
