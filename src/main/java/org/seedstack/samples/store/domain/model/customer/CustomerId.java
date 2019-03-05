@@ -7,22 +7,39 @@
 
 package org.seedstack.samples.store.domain.model.customer;
 
-import javax.persistence.Embeddable;
 import org.seedstack.business.domain.BaseValueObject;
 
+import javax.persistence.Embeddable;
+
+/**
+ * Class Customer ID.
+ */
 @Embeddable
 public class CustomerId extends BaseValueObject {
 
     private String value;
 
+    /**
+     * Constructor.
+     */
     private CustomerId() {
         // for JPA
     }
 
-    public CustomerId(String value) {
+    /**
+     * Constructor.
+     *
+     * @param value String.
+     */
+    public CustomerId(final String value) {
         this.value = value;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getValue() {
         return value;
     }

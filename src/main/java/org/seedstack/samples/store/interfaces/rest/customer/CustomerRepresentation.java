@@ -10,6 +10,9 @@ package org.seedstack.samples.store.interfaces.rest.customer;
 import org.seedstack.business.assembler.AggregateId;
 import org.seedstack.business.assembler.FactoryArgument;
 
+/**
+ * Class.
+ */
 public class CustomerRepresentation {
 
     private String id;
@@ -18,11 +21,23 @@ public class CustomerRepresentation {
     private String address;
     private String deliveryAddress;
 
+    /**
+     * Constructor.
+     */
     public CustomerRepresentation() {
     }
 
-    public CustomerRepresentation(String id, String firstName, String lastName, String address,
-            String deliveryAddress) {
+    /**
+     * Constructor.
+     *
+     * @param id              String.
+     * @param firstName       String.
+     * @param lastName        String.
+     * @param address         String.
+     * @param deliveryAddress String.
+     */
+    public CustomerRepresentation(final String id, final String firstName, final String lastName, final String address,
+                                  final String deliveryAddress) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,45 +45,95 @@ public class CustomerRepresentation {
         this.deliveryAddress = deliveryAddress;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     @AggregateId
     @FactoryArgument(index = 0)
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    /**
+     * Setter.
+     *
+     * @param id String.
+     */
+    public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    /**
+     * Setter.
+     *
+     * @param firstName String.
+     */
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    /**
+     * Setter.
+     *
+     * @param lastName String.
+     */
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    /**
+     * Setter.
+     *
+     * @param address String.
+     */
+    public void setAddress(final String address) {
         this.address = address;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getDeliveryAddress() {
         return deliveryAddress;
     }
 
-    public void setDeliveryAddress(String deliveryAddress) {
+    /**
+     * Setter.
+     *
+     * @param deliveryAddress String.
+     */
+    public void setDeliveryAddress(final String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
 }

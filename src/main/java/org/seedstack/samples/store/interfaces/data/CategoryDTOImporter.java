@@ -8,6 +8,9 @@ import org.seedstack.business.domain.Repository;
 import org.seedstack.samples.store.domain.model.category.Category;
 import org.seedstack.samples.store.domain.model.product.Product;
 
+/**
+ * Class.
+ */
 public class CategoryDTOImporter extends BaseDataImporter<CategoryDTO> {
     @Inject
     private Repository<Category, Long> categoryRepository;
@@ -16,18 +19,29 @@ public class CategoryDTOImporter extends BaseDataImporter<CategoryDTO> {
     @Inject
     private FluentAssembler fluentAssembler;
 
+    /**
+     * Method.
+     * @return
+     */
     @Override
     public boolean isInitialized() {
         return !categoryRepository.isEmpty();
     }
 
+    /**
+     * Method.
+     */
     @Override
     public void clear() {
         categoryRepository.clear();
     }
 
+    /**
+     * Method.
+     * @param data Stream.
+     */
     @Override
-    public void importData(Stream<CategoryDTO> data) {
+    public void importData(final Stream<CategoryDTO> data) {
         data.forEach(categoryDTO -> {
             Category category = fluentAssembler.merge(categoryDTO).into(Category.class).fromFactory();
             categoryRepository.add(category);

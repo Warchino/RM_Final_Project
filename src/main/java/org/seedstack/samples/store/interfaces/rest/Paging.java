@@ -10,6 +10,9 @@ package org.seedstack.samples.store.interfaces.rest;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.QueryParam;
 
+/**
+ * Class.
+ */
 public class Paging {
 
     @QueryParam("pageIndex")
@@ -19,19 +22,39 @@ public class Paging {
     @DefaultValue("10")
     private Integer pageSize;
 
+    /**
+     * Getter.
+     *
+     * @return Long.
+     */
     public Long getPageIndex() {
         return pageIndex;
     }
 
-    public void setPageIndex(Long pageIndex) {
+    /**
+     * Setter.
+     *
+     * @param pageIndex Long.
+     */
+    public void setPageIndex(final Long pageIndex) {
         this.pageIndex = pageIndex;
     }
 
+    /**
+     * Getter.
+     *
+     * @return Integer.
+     */
     public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(Integer pageSize) {
+    /**
+     * Setter.
+     *
+     * @param pageSize Integer.
+     */
+    public void setPageSize(final Integer pageSize) {
         this.pageSize = pageSize;
     }
 }

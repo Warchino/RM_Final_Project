@@ -14,6 +14,9 @@ import org.seedstack.business.data.DataSet;
 import org.seedstack.samples.store.domain.model.customer.Customer;
 import org.seedstack.samples.store.domain.model.customer.CustomerId;
 
+/**
+ * Class.
+ */
 @DtoOf(Customer.class)
 @DataSet(group = "store", name = "customers")
 public class CustomerDTO {
@@ -24,57 +27,122 @@ public class CustomerDTO {
     private String deliveryAddress;
     private String password;
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    /**
+     * Setter.
+     *
+     * @param id String.
+     */
+    public void setId(final String id) {
         this.id = id;
     }
 
+    /**
+     * Getter.
+     *
+     * @return CustomerID.
+     */
     @AggregateId(index = 0)
     @FactoryArgument(index = 0)
     public CustomerId getCustomerId() {
         return new CustomerId(id);
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    /**
+     * Setter.
+     *
+     * @param firstName String.
+     */
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    /**
+     * Setter.
+     *
+     * @param lastName String.
+     */
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    /**
+     * Setter.
+     *
+     * @param address String.
+     */
+    public void setAddress(final String address) {
         this.address = address;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getDeliveryAddress() {
         return deliveryAddress;
     }
 
-    public void setDeliveryAddress(String deliveryAddress) {
+    /**
+     * Setter.
+     *
+     * @param deliveryAddress String.
+     */
+    public void setDeliveryAddress(final String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    /**
+     * Setter.
+     *
+     * @param password String.
+     */
+    public void setPassword(final String password) {
         this.password = password;
     }
 }

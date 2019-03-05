@@ -7,10 +7,14 @@
 
 package org.seedstack.samples.store.domain.model.customer;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
 import org.seedstack.business.domain.BaseAggregateRoot;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
+/**
+ * Class Customer.
+ */
 @Entity
 public class Customer extends BaseAggregateRoot<CustomerId> {
     @EmbeddedId
@@ -21,57 +25,120 @@ public class Customer extends BaseAggregateRoot<CustomerId> {
     private String deliveryAddress;
     private String password;
 
+    /**
+     * Customer Constructor.
+     */
     private Customer() {
         // A default constructor is needed by the persistence framework
         // but can be kept private
     }
 
-    public Customer(CustomerId customerId) {
+    /**
+     * Customer with id.
+     *
+     * @param customerId Object.
+     */
+    public Customer(final CustomerId customerId) {
         this.id = customerId;
     }
 
+    /**
+     * Getter.
+     *
+     * @return Object.
+     */
     @Override
     public CustomerId getId() {
         return id;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    /**
+     * Setter.
+     *
+     * @param firstName String.
+     */
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    /**
+     * Setter.
+     *
+     * @param lastName String.
+     */
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    /**
+     * Setter.
+     *
+     * @param address String.
+     */
+    public void setAddress(final String address) {
         this.address = address;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getDeliveryAddress() {
         return deliveryAddress;
     }
 
-    public void setDeliveryAddress(String deliveryAddress) {
+    /**
+     * Setter.
+     *
+     * @param deliveryAddress String.
+     */
+    public void setDeliveryAddress(final String deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
     }
 
+    /**
+     * Getter.
+     *
+     * @return String.
+     */
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    /**
+     * Setter.
+     *
+     * @param password String.
+     */
+    public void setPassword(final String password) {
         this.password = password;
     }
 }
