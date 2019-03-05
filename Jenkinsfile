@@ -53,7 +53,7 @@ pipeline {
 					keepAll: true,
 					reportDir: 'build/reports/checkstyle',
 					reportFiles: 'main.html',
-					reportName: 'Checklist Report'
+					reportName: 'Checkstyle Report'
 				  ]
 				
 				// Publish Spotbugs(Findbugs) Report main
