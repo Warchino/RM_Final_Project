@@ -52,14 +52,13 @@ pipeline {
 								reportFiles: 'index.html',
 								reportName: 'JaCoCo Report'
 							  ]
-							}
 							currentBuild.result = "SUCCESS"	
 					  	} catch (Exception e) {
 							currentBuild.result = "FAILED"
 							throw e
 					  	}
 					}
-                
+				}
         }
 
         stage('Code Quality Analysis') {
