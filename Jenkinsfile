@@ -4,87 +4,63 @@ pipeline {
     stages {
         stage('Build') {
 			steps {
-				script {
-					try {
-						echo 'Building...'
+				echo 'Building...'
 
-						sh './gradlew clean build'
-						archiveArtifacts artifacts: 'build/libs/*.war', fingerprint: true
+				sh './gradlew clean build'
+				archiveArtifacts artifacts: 'build/libs/*.war', fingerprint: true
 
-						sh './gradlew jar'
-						archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
-						currentBuild.result = "SUCCESS"
-					} catch (Exception e) {
-						currentBuild.result = "FAILED"
-						throw e
-					}
-				}
+				sh './gradlew jar'
+				archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
 			}
         }
         stage('Test') {
-			
-				steps {
-					script {
-						try {
-							echo 'Testing..'
+			steps {
+				echo 'Testing..'
 
-							sh './gradlew check'
+				sh './gradlew check'
 
-							// Publis the JUnit test Report
-							publishHTML target: [
-								allowMissing: false,
-								alwaysLinkToLastBuild: false,
-								keepAll: true,
-								reportDir: 'build/reports/tests/test',
-								reportFiles: 'index.html',
-								reportName: 'JUnit Report'
-							  ]
-							junit 'build/test-results/**/*.xml'
+				// Publis the JUnit test Report
+				publishHTML target: [
+					allowMissing: false,
+					alwaysLinkToLastBuild: false,
+					keepAll: true,
+					reportDir: 'build/reports/tests/test',
+					reportFiles: 'index.html',
+					reportName: 'JUnit Report'
+				  ]
+				junit 'build/test-results/**/*.xml'
 
-							sh './gradlew jacocoTestReport'
+				sh './gradlew jacocoTestReport'
 
-							// Publish the Java Code Coverage Report
-							publishHTML target: [
-								allowMissing: false,
-								alwaysLinkToLastBuild: false,
-								keepAll: true,
-								reportDir: 'build/reports/jacoco',
-								reportFiles: 'index.html',
-								reportName: 'JaCoCo Report'
-							  ]
-							currentBuild.result = "SUCCESS"	
-					  	} catch (Exception e) {
-							currentBuild.result = "FAILED"
-							throw e
-					  	}
-					}
-				}
+				// Publish the Java Code Coverage Report
+				publishHTML target: [
+					allowMissing: false,
+					alwaysLinkToLastBuild: false,
+					keepAll: true,
+					reportDir: 'build/reports/jacoco',
+					reportFiles: 'index.html',
+					reportName: 'JaCoCo Report'
+				  ]
+			}
         }
 
         stage('Code Quality Analysis') {
 			steps {
-				script {
-					try {
-						echo 'Analyzing....'
-						sh './gradlew sonarqube'
-						currentBuild.result = "SUCCESS"	
-					} catch (Exception e) {
-						currentBuild.result = "FAILED"
-						throw e
-					}
-				}
+				echo 'Analyzing....'
+				sh './gradlew sonarqube'
 			}
         }
     }
     post {
             always {
                 echo 'Email notification'
-				script {
-					if (currentBuild.result =="FAILED"){
+				success {
+					slackSend ( message: "STARTED")
+					notifySuccessful()
+				}
+				failure { 
+					slackSend ( message: "Failure")
 					notifyFailed()
-					} else{
-						notifySuccessful()
-					}
 				}
             }
 	}
