@@ -44,23 +44,23 @@ pipeline {
 					reportName: 'Jacoco Report'
 				  ]
 				
-				// Publish Checklist Report
+				// Publish Checklist Report main
 				publishHTML target: [
 					allowMissing: false,
 					alwaysLinkToLastBuild: false,
 					keepAll: true,
 					reportDir: 'build/reports/checklist',
-					reportFiles: 'index.html',
+					reportFiles: 'main.html',
 					reportName: 'Checklist Report'
 				  ]
 				
-				// Publish Spotbugs(Findbugs) Report
+				// Publish Spotbugs(Findbugs) Report main
 				publishHTML target: [
 					allowMissing: false,
 					alwaysLinkToLastBuild: false,
 					keepAll: true,
 					reportDir: 'build/reports/spotbugs',
-					reportFiles: 'index.html',
+					reportFiles: 'main.html',
 					reportName: 'Spotbugs Report'
 				  ]
 			}
