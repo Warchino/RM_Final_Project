@@ -55,11 +55,9 @@ pipeline {
             always {
                 echo 'Email notification'
 				success {
-					slackSend ( message: "STARTED")
 					notifySuccessful()
 				}
 				failure { 
-					slackSend ( message: "Failure")
 					notifyFailed()
 				}
             }
