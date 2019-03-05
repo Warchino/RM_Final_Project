@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+		
         stage('Build') {
 			steps {
 				echo 'Building...'
@@ -13,6 +14,7 @@ pipeline {
 				archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true
 			}
         }
+		
         stage('Test') {
 			steps {
 				echo 'Testing..'
@@ -51,9 +53,10 @@ pipeline {
 			}
         }
     }
+	
 	post {
 		always{
-			echo 'Email notification'
+			echo 'Email notification...'
 		}
 		success {
 			notifySuccessful()
@@ -63,7 +66,6 @@ pipeline {
 		}
 	}
 }
-
 
 def notifySuccessful() {
 	  emailext (
