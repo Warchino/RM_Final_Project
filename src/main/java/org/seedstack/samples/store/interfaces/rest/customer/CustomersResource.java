@@ -114,10 +114,7 @@ public class CustomersResource {
     @Path("/{customerId}")
     public CustomerRepresentation getCustomer(final @PathParam("customerId") String customerId) {
         return fluentAssembler.assemble(customerRepository.get(new CustomerId(customerId))
-                .orElseThrow(() -> {
-
-                    return new NotFoundException(CUSTOMER + customerId + NOT_FOUND);
-                }))
+                .orElseThrow(() -> new NotFoundException(CUSTOMER + customerId + NOT_FOUND)))
                 .to(CustomerRepresentation.class);
     }
 
@@ -126,13 +123,11 @@ public class CustomersResource {
      *
      * @param customerRepresentation CustomerRepresentation.
      * @return Response.
-     * @throws URISyntaxException Exception.
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createCustomer(final CustomerRepresentation customerRepresentation)
-            throws URISyntaxException {
+    public Response createCustomer(final CustomerRepresentation customerRepresentation) {
         Customer customer = fluentAssembler.merge(customerRepresentation)
                 .into(Customer.class)
                 .fromFactory();

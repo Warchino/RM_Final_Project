@@ -120,13 +120,11 @@ public class ProductsResource {
      *
      * @param productRepresentation ProductRepresentation.
      * @return Response.
-     * @throws URISyntaxException Exception.
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createProduct(final ProductRepresentation productRepresentation)
-            throws URISyntaxException {
+    public Response createProduct(final ProductRepresentation productRepresentation) {
         Product product = fluentAssembler.merge(productRepresentation)
                 .into(Product.class)
                 .fromFactory();
