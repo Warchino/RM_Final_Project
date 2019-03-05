@@ -52,7 +52,9 @@ pipeline {
         }
     }
 	post {
-		echo 'Email notification'
+		always{
+			echo 'Email notification'
+		}
 		success {
 			notifySuccessful()
 		}
