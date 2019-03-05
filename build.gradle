@@ -76,9 +76,7 @@ jacocoTestReport {
 
 sonarqube {
     properties {
-        property "sonar.projectKey", "Warchino_RM_Final_Project"
-        property "sonar.organization", "warchino-github"
-        property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "18210e00d00ca14fd7996aa1ac48e579703e13ef"
+        property "sonar.host.url", "http://10.28.130.5:9000"
+        property "sonar.login", "d2d08d1514f208ba177f2c30180907d554acecde"
     }
 }
