@@ -19,7 +19,7 @@ pipeline {
 			steps {
 				echo 'Testing..'
 
-				sh './gradlew check'
+				sh './gradlew test'
 
 				// Publis the JUnit test Report
 				publishHTML target: [
@@ -43,13 +43,15 @@ pipeline {
 					reportFiles: 'index.html',
 					reportName: 'Jacoco Report'
 				  ]
-				
+
+                sh './gradlew check'
+
 				// Publish Checklist Report main
 				publishHTML target: [
 					allowMissing: false,
 					alwaysLinkToLastBuild: false,
 					keepAll: true,
-					reportDir: 'build/reports/checklist',
+					reportDir: 'build/reports/checkstyle',
 					reportFiles: 'main.html',
 					reportName: 'Checklist Report'
 				  ]
