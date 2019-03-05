@@ -62,6 +62,9 @@ public class CustomersResource {
     @Context
     private UriInfo uriInfo;
 
+    private static final String CUSTOMER = "Customer ";
+    private static final String NOT_FOUND = " not found";
+
     /**
      * Method.
      *
@@ -111,7 +114,10 @@ public class CustomersResource {
     @Path("/{customerId}")
     public CustomerRepresentation getCustomer(final @PathParam("customerId") String customerId) {
         return fluentAssembler.assemble(customerRepository.get(new CustomerId(customerId))
-                .orElseThrow(() -> new NotFoundException("Customer " + customerId + " not found")))
+                .orElseThrow(() -> {
+
+                    return new NotFoundException(CUSTOMER + customerId + NOT_FOUND);
+                }))
                 .to(CustomerRepresentation.class);
     }
 
@@ -136,7 +142,7 @@ public class CustomersResource {
         } catch (AggregateExistsException e) {
             final int status = 409;
             throw new ClientErrorException(
-                    "Customer " + customerRepresentation.getId() + " already exists",
+                    CUSTOMER + customerRepresentation.getId() + " already exists",
                     status
             );
         }
@@ -169,7 +175,8 @@ public class CustomersResource {
             customer = fluentAssembler.merge(customerRepresentation).into(Customer.class).fromRepository()
                     .orFail();
         } catch (AggregateNotFoundException e) {
-            throw new NotFoundException("Customer " + customerId + " not found");
+
+            throw new NotFoundException(CUSTOMER + customerId + NOT_FOUND);
         }
         customerRepository.update(customer);
 
@@ -187,7 +194,7 @@ public class CustomersResource {
         try {
             customerRepository.remove(new CustomerId(customerId));
         } catch (AggregateNotFoundException e) {
-            throw new NotFoundException("Customer " + customerId + " not found", e);
+            throw new NotFoundException(CUSTOMER + customerId + NOT_FOUND, e);
         }
     }
 }

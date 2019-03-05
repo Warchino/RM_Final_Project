@@ -35,6 +35,6 @@ public class DataLifecycleListener implements LifecycleListener {
      */
     @Override
     public void stopping() {
-
+        // Empty.
     }
 }
